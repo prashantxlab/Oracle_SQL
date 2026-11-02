@@ -25,7 +25,7 @@
 -- Calculates total headcount and average salary per department
 SELECT department_id,
        COUNT(employee_id) AS total_employees,
-       ROUND(AVG(salary), 2) AS average_salary
+       AVG(salary), AS average_salary
 FROM hr.employees
 GROUP BY department_id;
 ```
