@@ -100,6 +100,26 @@ Illustration with two employees tied at 17000:
 - **Nth highest salary:** use `DENSE_RANK() = N` (no gaps, so the Nth value always exists).
 - With ties, `ROW_NUMBER` picks an arbitrary order; add a second column in `ORDER BY` to make it predictable.
 
+### How to remember
+
+| Function | Ties | Gaps after ties | Example (marks 90, 80, 80, 70) |
+|---|---|---|---|
+| `ROW_NUMBER` | Always unique, ties get different numbers | n/a | 1, 2, 3, 4 |
+| `RANK` | Ties share a rank, then it **skips** | Yes | 1, 2, 2, 4 |
+| `DENSE_RANK` | Ties share a rank, **no skip** | No | 1, 2, 2, 3 |
+
+If there are no ties, all three give the same result.
+
+### When to use which
+
+| Function | Use it for |
+|---|---|
+| `ROW_NUMBER` | Giving every row a unique number, or removing duplicates by keeping only row number 1 |
+| `RANK` | Competition-style ranking, where gaps are acceptable |
+| `DENSE_RANK` | "2nd highest salary" or "top 3 salaries" questions |
+
+**Why `DENSE_RANK` for Nth highest:** it has no gaps, so a 2nd or 3rd value always exists. With `RANK` in the example above, nobody has rank 3, so a "3rd highest" query would return nothing.
+
 ---
 
 ## 5. LAG and LEAD
